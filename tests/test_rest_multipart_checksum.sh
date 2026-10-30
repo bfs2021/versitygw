@@ -135,43 +135,43 @@ source ./tests/drivers/upload_part/upload_part_rest.sh
 
 # tags: curl,multipart,checksum,CompleteMultipartUpload,x-amz-checksum-type,x-amz-checksum-algorithm
 @test "REST - multipart - composite - sha256" {
-  run test_multipart_upload_with_checksum "COMPOSITE" "SHA256"
+  run test_multipart_upload_with_checksum "COMPOSITE" "sha256"
   assert_success
 }
 
 # tags: curl,multipart,checksum,CompleteMultipartUpload,x-amz-checksum-type,x-amz-checksum-algorithm
 @test "REST - multipart - composite - sha1" {
-  run test_multipart_upload_with_checksum "COMPOSITE" "SHA1"
+  run test_multipart_upload_with_checksum "COMPOSITE" "sha1"
   assert_success
 }
 
 # tags: curl,multipart,checksum,CompleteMultipartUpload,x-amz-checksum-type,x-amz-checksum-algorithm
 @test "REST - multipart - composite - crc32" {
-  run test_multipart_upload_with_checksum "COMPOSITE" "CRC32"
+  run test_multipart_upload_with_checksum "COMPOSITE" "crc32"
   assert_success
 }
 
 # tags: curl,multipart,checksum,CompleteMultipartUpload,x-amz-checksum-type,x-amz-checksum-algorithm
 @test "REST - multipart - composite - crc32c" {
-  run test_multipart_upload_with_checksum "COMPOSITE" "CRC32C"
+  run test_multipart_upload_with_checksum "COMPOSITE" "crc32c"
   assert_success
 }
 
 # tags: curl,multipart,checksum,CompleteMultipartUpload,x-amz-checksum-type,x-amz-checksum-algorithm
 @test "REST - multipart - full object - crc32" {
-  run test_multipart_upload_with_checksum "FULL_OBJECT" "CRC32"
+  run test_multipart_upload_with_checksum "FULL_OBJECT" "crc32"
   assert_success
 }
 
 # tags: curl,multipart,checksum,CompleteMultipartUpload,x-amz-checksum-type,x-amz-checksum-algorithm
 @test "REST - multipart - full object - crc32c" {
-  run test_multipart_upload_with_checksum "FULL_OBJECT" "CRC32C"
+  run test_multipart_upload_with_checksum "FULL_OBJECT" "crc32c"
   assert_success
 }
 
 # tags: curl,multipart,checksum,CompleteMultipartUpload,x-amz-checksum-type,x-amz-checksum-algorithm
 @test "REST - multipart - full object - crc64nvme" {
-  run test_multipart_upload_with_checksum "FULL_OBJECT" "CRC64NVME"
+  run test_multipart_upload_with_checksum "FULL_OBJECT" "crc64nvme"
   assert_success
 }
 
@@ -262,5 +262,15 @@ source ./tests/drivers/upload_part/upload_part_rest.sh
 # tags: curl,multipart,checksum,CompleteMultipartUpload,invalid-header,x-amz-checksum-type,x-amz-checksum-algorithm
 @test "REST - multipart - full object - invalid crc64nvme" {
   run test_complete_multipart_upload_invalid_checksum "FULL_OBJECT" "CRC64NVME"
+  assert_success
+}
+
+@test "REST - multipart - checksum changes midway - composite/sha256" {
+  run test_multipart_upload_with_checksum_part_replacement "COMPOSITE" "sha256"
+  assert_success
+}
+
+@test "REST - multipart - checksum changes midway - full object/crc64nvme" {
+  run test_multipart_upload_with_checksum_part_replacement "COMPOSITE" "sha256"
   assert_success
 }
